@@ -1,13 +1,25 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, Inject } from '@angular/core';
+import { RouterModule, Router } from '@angular/router';
+import { HomeComponent } from './home/home.component';
 
 @Component({
+  imports: [HomeComponent, RouterModule],
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
+  template: ``,
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css'],
+  standalone: true,
 })
 export class AppComponent {
-  title = 'angular-base';
+  constructor(@Inject(Router) private router: Router) {}
+
+  goToHome() {
+    console.log('home button clicked');
+    this.router.navigate(['/']); // Navigate to the home page
+  }
+
+  goToAbout() {
+    console.log('about button clicked');
+    this.router.navigate(['/about']); // Navigate to the about us page
+  }
 }
